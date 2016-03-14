@@ -23,8 +23,8 @@ Using descriptive fields user needs to
 * additionally, add more attributes for products using JSON data format - those attributes can be based on existing product categories in Magento or adding new ones with default value.
 
 ### Available attribute json options
-* attribute - Magento attribute code, Google Shopping Feed looking for attribute in Magento db by attribute value
-* type - required field if attribute is not already provided by Google Merchant Center (See [Products Feed Specification](https://support.google.com/merchants/answer/188494?hl=en&ref_topic=3404778))
+* attribute - Magento attribute code used to fetch field value
+* type - field data type (‘integer’, ’string’, etc.), required if attribute is not already provided by Google Merchant Center (See [Products Feed Specification](https://support.google.com/merchants/answer/188494?hl=en&ref_topic=3404778))
 * prefix - prefix for tags, usually it is 'g' for shopping feed
 * default - default value for tag if attribute is not found in Magento attributes, in case that default value is not set and also there are no such category in Magentos' product categories tag will not be created
 * value_prefix - custom prefix for attributes in tag
@@ -36,7 +36,7 @@ Example of JSON for adding new attributes:
 		"default": "Unisex",
 		"type": "string",
 		"prefix": "g",
-    "value_prefix": "c-",
+		"value_prefix": "shop-",
 		"attribute": "kid_gender"
 	},
 	"size": {
