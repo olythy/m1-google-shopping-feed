@@ -90,7 +90,7 @@ Navigating to System -> Configuration and choosing in left menu Google Shopping 
 ### Google Shopping Feed screenshots
 
 ![form](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/edit-form.png "Edit form")
-![grid](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/grid.png Grid preview")
+![grid](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/grid.png "Grid preview")
 ![cron](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/system-config.png "System config")
 
 Copyright StuntCoders — [Start Your Online Store Now](http://stuntcoders.com/)
