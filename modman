@@ -2,4 +2,4 @@ app/code/local/Stuntcoders/*                                        app/code/loc
 
 app/design/adminhtml/default/*                                      app/design/adminhtml/
 
-app/design/etc/modules/Stuntcoders_GoogleShopping.xml               app/design/etc/modules/Stuntcoders_GoogleShopping.xml
+app/etc/modules/Stuntcoders_GoogleShopping.xml                      app/etc/modules/Stuntcoders_GoogleShopping.xml
