@@ -1,4 +1,4 @@
-# Google Shopping Feed #
+# Google Shopping Feed - Magento Module#
 
 In need of selling products online, there is also need of using Google shopping service which makes easy for users to search for products on online shopping websites and compare prices.
 
