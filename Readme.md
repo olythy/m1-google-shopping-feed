@@ -30,7 +30,7 @@ Using descriptive fields user needs to
 * value_prefix - custom prefix for attributes in tag
 
 Example of JSON for adding new attributes:
-```
+```json
 {
 	"gender": {
 		"default": "Unisex",
@@ -51,7 +51,7 @@ Before creating gender tag in XML file, Google Shopping Feed checks attributes i
 
 ### Example of XML file
 
-```
+```xml
 <?xml version="1.0"?>
 <rss xmlns:g="" version="2.0">
   <channel>
