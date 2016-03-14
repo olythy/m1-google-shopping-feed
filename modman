@@ -1,0 +1,5 @@
+app/code/local/Stuntcoders/*                                        app/code/local/Stuntcoders/
+
+app/design/adminhtml/default/*                                      app/design/adminhtml/
+
+app/design/etc/modules/Stuntcoders_GoogleShopping.xml               app/design/etc/modules/Stuntcoders_GoogleShopping.xml
