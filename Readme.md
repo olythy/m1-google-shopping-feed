@@ -88,7 +88,10 @@ Before creating gender tag in XML file, Google Shopping Feed checks attributes i
 Navigating to System -> Configuration and choosing in left menu Google Shopping will lead to Google Shopping Crone Scheduler where user need to set Frequency and Start Time for periodic generating existing Google Shopping Feed XML files.
 
 ### Google Shopping Feed screenshots
-
+Reference-style:
+![alt text][form]
+![alt text][grid]
+![alt text][crone]
 [form]: https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/edit-form.png "Edit form"
 [grid]: https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/grid.png "Grid preview"
 [crone]: https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/system-config.png "System config"
