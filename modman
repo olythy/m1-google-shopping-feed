@@ -1,4 +1,4 @@
-app/code/local/Stuntcoders/*                                                  app/code/local/Stuntcoders/
+app/code/local/Stuntcoders/*                                                  app/code/community/Stuntcoders/
 
 app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml    app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml
 app/design/adminhtml/default/default/template/stuntcoders/*                   app/design/adminhtml/default/default/template/stuntcoders/

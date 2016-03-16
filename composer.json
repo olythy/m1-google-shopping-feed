@@ -1,0 +1,8 @@
+{
+  "name": "borasocom-team/stunt_mage_google_shopping_feed",
+  "type":"magento-module",
+  "require": {
+    "php": ">=5.3",
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}

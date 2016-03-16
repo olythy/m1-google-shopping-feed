@@ -3,7 +3,7 @@
     <modules>
         <Stuntcoders_GoogleShopping>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Stuntcoders_GoogleShopping>
     </modules>
 </config>
