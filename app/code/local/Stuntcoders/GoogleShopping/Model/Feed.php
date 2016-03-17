@@ -73,6 +73,13 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                 }
             }
 
+	        if($product->isInStock()) {
+		        $item->appendChild($doc->createElement('g:availability', 'in stock'));
+	        }
+	        else {
+		        $item->appendChild($doc->createElement('g:availability', 'out of stock'));
+	        }
+
             $item->appendChild($doc->createElement('g:link', $product->getUrlInStore()));
             $item->appendChild($doc->createElement(
                 'g:image_link',
