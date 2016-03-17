@@ -1,14 +1,15 @@
+<?xml version="1.0"?>
 <config>
     <tabs>
         <stuntcoders_googleshopping translate="label" module="stuntcoders_googleshopping">
             <label>Google Shopping Feed</label>
-            <sort_order>99999</sort_order>
+            <sort_order>10</sort_order>
         </stuntcoders_googleshopping>
     </tabs>
     <sections>
         <stuntcoders_googleshopping translate="label" module="stuntcoders_googleshopping">
             <label>Google Shopping</label>
-            <tab>stuntcoders</tab>
+            <tab>stuntcoders_googleshopping</tab>
             <frontend_type>text</frontend_type>
             <sort_order>1000</sort_order>
             <show_in_default>1</show_in_default>
