@@ -50,7 +50,8 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                 $valuePrefix = '';
 
                 if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
-                    $tagValue = $product->getAttributeText($value['attribute']);
+                    //$tagValue = $product->getAttributeText($value['attribute']);
+                    $tagValue = $product->getData($value['attribute']);
                 }
 
                 if (empty($tagValue)) {
