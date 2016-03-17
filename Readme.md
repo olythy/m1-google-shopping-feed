@@ -94,3 +94,49 @@ Navigating to System -> Configuration and choosing in left menu Google Shopping 
 ![cron](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/system-config.png "System config")
 
 Copyright StuntCoders — [Start Your Online Store Now](http://stuntcoders.com/)
+
+### JSON example configuration
+```json
+{
+	"id": {
+		"default": "1",
+		"prefix": "g",
+		"attribute": "entity_id"
+	},
+	"title": {
+		"default": "bla",
+		"prefix": "g",
+		"attribute": "name"
+	},
+	"description": {
+		"default": "bla bla",
+		"prefix": "g",
+		"attribute": "description"
+	},
+	"condition": {
+		"default": "new",
+		"prefix": "g"
+	},
+	"mpn": {
+		"default": "<sku>",
+		"prefix": "g",
+		"attribute": "sku"
+	},
+	"brand": {
+		"default": "<brand>",
+		"prefix": "g"
+	},
+	"shipping": {
+		"country": {
+			"default": "IT",
+			"prefix": "g"
+		},
+		"price": {
+			"default": "<price> EUR",
+			"prefix": "g"
+		},
+		"prefix": "g"
+	}
+}
+
+```
