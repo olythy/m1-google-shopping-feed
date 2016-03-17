@@ -65,6 +65,11 @@ class Stuntcoders_GoogleShopping_GoogleShoppingController extends Mage_Adminhtml
 
         $file = new Varien_Io_File();
         $file->mkdir(dirname($feed->getPath()), 755, true);
+        if($file->fileExists($feed->getPath())){
+            if($file->isWriteable($feed->getPath())){
+                $file->filePutContent('',$feed->getPath());
+            }
+        }
         $file->write($feed->getPath(), $feed->generateXml());
 
         Mage::getSingleton('core/session')->addSuccess($this->__('Google feed successfully generated'));
