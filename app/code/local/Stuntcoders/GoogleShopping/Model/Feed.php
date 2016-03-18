@@ -38,7 +38,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		$channel = $rss->appendChild($doc->createElement('channel'));
 		$channel->appendChild($doc->createElement('title', $this->getTitle()));
 		$channel->appendChild($doc->createElement('link', Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)));
-		$channel->appendChild($doc->createElement('description', $this->getDescription()));
+		$channel->appendChild($doc->createElement('description', utf8_decode($this->getDescription())));
 
 		$attributes = json_decode($this->getAttributes(), true);
 		foreach ($productCollection as $product) {
