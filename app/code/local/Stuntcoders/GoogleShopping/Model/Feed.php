@@ -82,7 +82,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 							$valuePrefix = $subValue['value_prefix'];
 						}
 
-						$subItemTag = $itemTag->appendChild($doc->createElement($prefix . $subName, $valuePrefix . $subTagValue));
+						$subItemTag = $itemTag->appendChild($doc->createElement($prefix . $subName, '<![CDATA[' . $valuePrefix . $subTagValue . ']]>');
 
 						if (!empty($value['type'])) {
 							$subItemTag->setAttribute('type', $subValue['type']);
@@ -106,7 +106,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 					$valuePrefix = $value['value_prefix'];
 				}
 
-				$itemTag = $item->appendChild($doc->createElement($prefix . $name, $valuePrefix . $tagValue));
+				$itemTag = $item->appendChild($doc->createElement($prefix . $name, '<![CDATA[' . $valuePrefix . $tagValue . ']]>'));
 
 				if (!empty($value['type'])) {
 					$itemTag->setAttribute('type', $value['type']);
