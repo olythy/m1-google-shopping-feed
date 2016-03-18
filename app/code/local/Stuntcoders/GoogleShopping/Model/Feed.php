@@ -29,6 +29,8 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		                         ->addAttributeToFilter('category_id', array('in' => explode(',', $this->getCategories())))
 		                         ->groupByAttribute('entity_id');
 
+		Mage::app()->setCurrentStore(Mage_Core_Model_App::DISTRO_STORE_ID);
+
 		$doc = new DOMDocument('1.0');
 		$doc->formatOutput = true;
 
@@ -122,7 +124,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 				$item->appendChild($doc->createElement('g:availability', 'out of stock'));
 			}
 
-			$item->appendChild($doc->createElement('g:link', $product->getUrlInStore()));
+			$item->appendChild($doc->createElement('g:link', $product->getProductUrl()));
 			$item->appendChild($doc->createElement(
 				'g:image_link',
 				Mage::helper('catalog/image')->init($product, 'image')->resize(800)
