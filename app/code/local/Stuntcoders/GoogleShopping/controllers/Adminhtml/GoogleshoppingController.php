@@ -77,6 +77,8 @@ class Stuntcoders_GoogleShopping_Adminhtml_GoogleshoppingController extends Mage
 		}
 		$file->write($feed->getPath(), $feed->generateXml());
 
+		Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+
 		Mage::getSingleton('core/session')->addSuccess($this->__('Google feed successfully generated'));
 
 		return $this->_redirectReferer('*/*/index');
