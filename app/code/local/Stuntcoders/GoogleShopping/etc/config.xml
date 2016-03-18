@@ -38,6 +38,15 @@
             </stuntcoders_googleshopping_setup>
         </resources>
     </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <stuntcoders_googleshopping>
+                    <file>stuntcoders/googleshopping.xml</file>
+                </stuntcoders_googleshopping>
+            </updates>
+        </layout>
+    </adminhtml>
     <admin>
         <routers>
             <adminhtml>
