@@ -38,7 +38,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		$channel = $rss->appendChild($doc->createElement('channel'));
 		$channel->appendChild($doc->createElement('title', $this->getTitle()));
 		$channel->appendChild($doc->createElement('link', Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)));
-		$channel->appendChild($doc->createElement('description', utf8_decode($this->getDescription())));
+		$channel->appendChild($doc->createElement('description', $this->getDescription()));
 
 		$attributes = json_decode($this->getAttributes(), true);
 		foreach ($productCollection as $product) {
@@ -67,7 +67,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 						}
 
 						if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
-							$subTagValue = $product->getData($subValue['attribute']);
+							$subTagValue = strip_tags(utf8_decode($product->getData($subValue['attribute'])));
 						}
 
 						if (empty($subTagValue)) {
@@ -91,7 +91,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 				}
 
 				if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
-					$tagValue = $product->getData($value['attribute']);
+					$tagValue = strip_tags(utf8_decode($product->getData($value['attribute'])));
 				}
 
 				if (empty($tagValue)) {
