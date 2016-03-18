@@ -82,7 +82,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 							$valuePrefix = $subValue['value_prefix'];
 						}
 
-						$subItemTag = $itemTag->appendChild($doc->createElement($prefix . $subName, '<![CDATA[' . $valuePrefix . $subTagValue . ']]>');
+						$subItemTag = $itemTag->appendChild($doc->createElement($prefix . $subName, '<![CDATA[' . $valuePrefix . $subTagValue . ']]>'));
 
 						if (!empty($value['type'])) {
 							$subItemTag->setAttribute('type', $subValue['type']);
