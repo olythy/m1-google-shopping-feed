@@ -1,7 +1,13 @@
 <?php
 
-class Stuntcoders_GoogleShopping_GoogleShoppingController extends Mage_Adminhtml_Controller_Action
+//class Stuntcoders_GoogleShopping_GoogleShoppingController extends Mage_Adminhtml_Controller_Action
+class Stuntcoders_GoogleShopping_Adminhtml_GoogleShoppingController extends Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('system/config/stuntcoders_googleshopping');
+    }
+
     public function indexAction()
     {
         $this->loadLayout();
