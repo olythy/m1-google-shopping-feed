@@ -93,7 +93,14 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 					}
 				}
 
-				if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
+				if ($name === 'product_type') {
+					$tagValue = $this->categorySubcategory($product);
+					$tagValue = str_replace('Default Category > ','',$tagValue);
+				}
+				else if ($name === 'google_product_category') {
+					$tagValue = $this->getGoogleCategories($product);
+				}
+				else if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
 					$tagValue = $product->getData($value['attribute']);
 				}
 
@@ -136,5 +143,35 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		}
 
 		return $doc->saveXML();
+	}
+
+	public function categorySubcategory($_product){
+
+		$response = array();
+
+		foreach ($_product->getCategoryCollection() as $category) {
+
+			$cat = Mage::getModel('catalog/category')->load($category->getId());
+			$response[] = $cat->getName();
+
+		}
+		$response = implode(" > ",$response);
+		return $response;
+
+	}
+
+	public function getGoogleCategories($_product){
+
+		$response = array();
+
+		foreach ($_product->getCategoryCollection() as $category) {
+
+			$cat = Mage::getModel('catalog/category')->load($category->getId());
+			$response[] = $cat->getGoogleCategory();
+
+		}
+		$response = implode(" > ",$response);
+		return $response;
+
 	}
 }

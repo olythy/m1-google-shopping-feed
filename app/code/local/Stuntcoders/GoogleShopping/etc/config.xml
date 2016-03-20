@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Stuntcoders_GoogleShopping>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </Stuntcoders_GoogleShopping>
     </modules>
     <global>
@@ -28,6 +28,7 @@
         <helpers>
             <stuntcoders_googleshopping>
                 <class>Stuntcoders_GoogleShopping_Helper</class>
+                <class>Mage_Eav_Model_Entity_Setup</class>
             </stuntcoders_googleshopping>
         </helpers>
         <resources>
