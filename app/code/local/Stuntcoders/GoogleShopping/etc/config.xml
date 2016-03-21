@@ -28,7 +28,6 @@
         <helpers>
             <stuntcoders_googleshopping>
                 <class>Stuntcoders_GoogleShopping_Helper</class>
-                <class>Mage_Eav_Model_Entity_Setup</class>
             </stuntcoders_googleshopping>
         </helpers>
         <resources>
