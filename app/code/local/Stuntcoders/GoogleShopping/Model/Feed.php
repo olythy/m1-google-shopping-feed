@@ -152,10 +152,10 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		foreach ($_product->getCategoryCollection() as $category) {
 
 			$cat = Mage::getModel('catalog/category')->load($category->getId());
-			$response[] = $cat->getName();
+			$response = $cat->getName();
 
 		}
-		$response = implode(" > ",$response);
+		//$response = implode(" > ",$response);
 		return $response;
 
 	}
