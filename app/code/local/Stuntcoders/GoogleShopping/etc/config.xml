@@ -35,6 +35,7 @@
             <stuntcoders_googleshopping_setup>
                 <setup>
                     <module>Stuntcoders_GoogleShopping</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
                 </setup>
             </stuntcoders_googleshopping_setup>
         </resources>
