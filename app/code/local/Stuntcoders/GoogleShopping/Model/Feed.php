@@ -98,7 +98,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 					$tagValue = str_replace('Default Category > ','',$tagValue);
 				}
 				else if ($name === 'google_product_category') {
-					$tagValue = $this->getGoogleCategories($product);
+					$tagValue = $this->getGoogleCategory($product);
 				}
 				else if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
 					$tagValue = $product->getData($value['attribute']);
@@ -145,33 +145,68 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 		return $doc->saveXML();
 	}
 
-	public function categorySubcategory($_product){
-
+	public function categorySubcategory($_product) {
+		$level = 1;
+		$deepestId = false;
+		$categories = array();
 		$response = array();
 
 		foreach ($_product->getCategoryCollection() as $category) {
-
-			$cat = Mage::getModel('catalog/category')->load($category->getId());
-			$response = $cat->getName();
-
+			$category = Mage::getModel('catalog/category')->load($category->getId());
+			if($category->getIsActive()) {
+				$path = $category->getPathIds();
+				array_shift($path);
+				$categories[$category->getId()] = array(
+					'name' => $category->getName(),
+					'path' => $path
+				);
+				if((int)$category->getLevel() > $level) {
+					$deepestId = $category->getId();
+					$level = (int)$category->getLevel();
+				}
+			}
 		}
-		//$response = implode(" > ",$response);
+
+		if(!$deepestId) {
+			return false;
+		}
+
+		foreach($categories[$deepestId]['path'] as $id) {
+			array_push($response, $categories[$id]['name']);
+		}
+
+		$response = implode(" > ",$response);
 		return $response;
 
 	}
 
-	public function getGoogleCategories($_product){
-
-		$response = array();
+	public function getGoogleCategory($_product){
+		$level = 1;
+		$deepestId = false;
+		$categories = array();
 
 		foreach ($_product->getCategoryCollection() as $category) {
-
-			$cat = Mage::getModel('catalog/category')->load($category->getId());
-			$response = $cat->getGoogleCategory();
-
+			$category = Mage::getModel('catalog/category')->load($category->getId());
+			if($category->getIsActive()) {
+				$categories[$category->getId()] = array(
+					'googleCategoryName' => $category->getGoogleCategory()
+				);
+				if((int)$category->getLevel() > $level) {
+					$deepestId = $category->getId();
+					$level = (int)$category->getLevel();
+				}
+			}
 		}
-		//$response = implode(" > ",$response);
-		return $response;
 
+		if(!$deepestId) {
+			return false;
+		}
+
+		$googleCategory = $categories[$deepestId]['googleCategoryName'];
+		if(!empty($googleCategory)) {
+			return $googleCategory;
+		}
+
+		return false;
 	}
 }
