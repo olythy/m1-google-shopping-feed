@@ -1,6 +1,6 @@
-app/code/local/Stuntcoders/*                                                  app/code/community/Stuntcoders/
+app/code/local/Stuntcoders/GoogleShopping                                   app/code/community/Stuntcoders/GoogleShopping
 
-app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml    app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml
-app/design/adminhtml/default/default/template/stuntcoders/*                   app/design/adminhtml/default/default/template/stuntcoders/
+app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml  app/design/adminhtml/default/default/layout/stuntcoders/googleshopping.xml
+app/design/adminhtml/default/default/template/stuntcoders/googleshopping    app/design/adminhtml/default/default/template/stuntcoders/googleshopping
 
-app/etc/modules/Stuntcoders_GoogleShopping.xml                                app/etc/modules/Stuntcoders_GoogleShopping.xml
+app/etc/modules/Stuntcoders_GoogleShopping.xml                              app/etc/modules/Stuntcoders_GoogleShopping.xml
