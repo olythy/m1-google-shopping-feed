@@ -1,5 +1,5 @@
 <?php
-
+// test github
 class Stuntcoders_GoogleShopping_Block_Add_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
@@ -20,6 +20,23 @@ class Stuntcoders_GoogleShopping_Block_Add_Form extends Mage_Adminhtml_Block_Wid
         $fieldset = $form->addFieldset('googleshopping_form', array(
             'legend' => Mage::helper('stuntcoders_googleshopping')->__('Google Shopping Feed')
         ));
+
+        if (!Mage::app()->isSingleStoreMode()) {
+            $fieldset->addField('stores', 'select', array(
+                'name' => 'stores[]',
+                'label' => Mage::helper('stuntcoders_googleshopping')->__('Store View'),
+                'title' => Mage::helper('stuntcoders_googleshopping')->__('Store View'),
+                'required' => true,
+                'values' => Mage::getSingleton('adminhtml/system_store')
+                    ->getStoreValuesForForm(false, true),
+            ));
+        }
+        else {
+            $fieldset->addField('stores', 'hidden', array(
+                'name' => 'stores[]',
+                'value' => Mage::app()->getStore(true)->getId()
+            ));
+        }
 
         $fieldset->addField('path', 'text', array(
             'label' => Mage::helper('stuntcoders_googleshopping')->__('Path for Feed .xml'),

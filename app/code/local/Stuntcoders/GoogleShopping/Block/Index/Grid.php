@@ -13,7 +13,21 @@ class Stuntcoders_GoogleShopping_Block_Index_Grid extends Mage_Adminhtml_Block_W
 
     protected function _prepareCollection()
     {
-        $this->setCollection(Mage::getModel('stuntcoders_googleshopping/feed')->getCollection());
+        //$this->setCollection(Mage::getModel('stuntcoders_googleshopping/feed')->getCollection());
+
+        $collection = Mage::getModel('stuntcoders_googleshopping/feed')->getCollection();
+
+        foreach($collection as $link){
+
+            if($link->getStores() && $link->getStores() != 0 ){
+                $link->setStores(explode(',',$link->getStores()));
+            }
+            else{
+                $link->setStores(array('0'));
+            }
+        }
+        $this->setCollection($collection);
+
         return parent::_prepareCollection();
     }
 
@@ -46,6 +60,21 @@ class Stuntcoders_GoogleShopping_Block_Index_Grid extends Mage_Adminhtml_Block_W
             'renderer' => 'stuntcoders_googleshopping/index_grid_renderer_link',
         ));
 
+
+        if (!Mage::app()->isSingleStoreMode()) {
+            $this->addColumn('stores', array(
+                'header'        => Mage::helper('stuntcoders_googleshopping')->__('Store View'),
+                'index'         => 'stores',
+                'type'          => 'store',
+                'width'         => '200px',
+                'store_all'     => true,
+                'store_view'    => true,
+                'sortable'      => true,
+                'filter_condition_callback' => array($this,
+                    '_filterStoreCondition'),
+            ));
+        }
+
         return parent::_prepareColumns();
     }
 
@@ -53,4 +82,12 @@ class Stuntcoders_GoogleShopping_Block_Index_Grid extends Mage_Adminhtml_Block_W
     {
         return $this->getUrl('*/*/add', array('id' => $row->getId()));
     }
+
+    protected function _filterStoreCondition($collection, $column){
+        if (!$value = $column->getFilter()->getValue()) {
+            return;
+        }
+        $this->getCollection()->addStoreFilter($value);
+    }
+
 }
