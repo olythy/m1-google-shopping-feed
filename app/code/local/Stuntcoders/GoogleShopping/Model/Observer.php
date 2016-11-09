@@ -7,8 +7,7 @@ class Stuntcoders_GoogleShopping_Model_Observer
         $feeds = Mage::getModel('stuntcoders_googleshopping/feed')->getCollection();
 
         foreach ($feeds as $feed) {
-            $feedModel = Mage::getModel('stuntcoders_googleshopping/feed')->load($feed->getId());
-
+            //$feedModel = Mage::getModel('stuntcoders_googleshopping/feed')->load($feed->getId());
             $file = new Varien_Io_File();
             $file->mkdir(dirname($feed->getPath()), 755, true);
             if($file->fileExists($feed->getPath())){
@@ -16,7 +15,7 @@ class Stuntcoders_GoogleShopping_Model_Observer
                     $file->filePutContent('',$feed->getPath());
                 }
             }
-            $file->write($feed->getPath(), $feedModel->generateXml());
+            $file->write($feed->getPath(), $feed->generateXml());
         }
     }
 }
