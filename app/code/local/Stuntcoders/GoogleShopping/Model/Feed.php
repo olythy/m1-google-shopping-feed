@@ -187,7 +187,6 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                 //array_push($response, $categories[$id]['name']);
             }
         }
-        Mage::log($response,null,'feed.log',true);
         $response = implode(" > ",$response);
         return $response;
 
@@ -214,7 +213,6 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
         if(!$deepestId) {
             return false;
         }
-
         $googleCategory = $categories[$deepestId]['googleCategoryName'];
         if(!empty($googleCategory)) {
             return $googleCategory;
