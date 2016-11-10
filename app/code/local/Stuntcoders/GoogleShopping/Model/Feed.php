@@ -220,4 +220,5 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 
         return false;
     }
+
 }
