@@ -46,7 +46,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
         $attributes = json_decode($this->getAttributes(), true);
         foreach ($productCollection as $product) {
 
-            $price = Mage::helper('core')->currency($product->getPrice(), true, false);
+            $price = $this->formatPriceForFeed($product->getPrice());
 
             if($product->getPrice() != '0.0000') {
 
@@ -105,13 +105,13 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                     } else if ($name === 'google_product_category') {
                         $tagValue = $this->getGoogleCategory($product);
 
-                    } else if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
-                        if ($name === 'sale_price') {
-                            $tagValue = "EUR " . $product->getData($value['attribute']);
-                        } else {
-                            $tagValue = $product->getData($value['attribute']);
+                    } else if ($name === 'sale_price') {
+                        if ($product->getPrice() > $product->getFinalPrice()){
+                            $tagValue = $this->formatPriceForFeed($product->getFinalPrice());
                         }
 
+                    } else if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
+                        $tagValue = $product->getData($value['attribute']);
                     }
 
                     if (empty($tagValue)) {
@@ -219,6 +219,14 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
         }
 
         return false;
+    }
+
+    public function formatPriceForFeed($price){
+
+        $price = sprintf("%F", $price);
+        $price = substr($price, 0, -4) . ' ' . Mage::app()->getStore()->getCurrentCurrencyCode();
+
+        return  $price;
     }
 
 }
