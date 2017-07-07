@@ -2,6 +2,7 @@
 
 class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
 {
+
     protected function _construct()
     {
         $this->_init('stuntcoders_googleshopping/feed');
@@ -10,7 +11,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
     public function validate()
     {
         $errors = array();
-        if (!$this->getPath()) {
+        if ( ! $this->getPath()) {
             $errors[] = Mage::helper('stuntcoders_googleshopping')->__('Path is mandatory');
         }
 
@@ -21,18 +22,25 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
     {
         Mage::app()->setCurrentStore($this->getStores());
 
-        $productCollection = Mage::getModel('catalog/product')
-            ->getCollection()
-            ->joinField(
-                'category_id', 'catalog/category_product', 'category_id',
-                'product_id = entity_id', null, 'left'
-            )
-            ->addStoreFilter($this->getStores())
-            ->addAttributeToSelect('*')
-            ->addAttributeToFilter('category_id', array('in' => explode(',', $this->getCategories())))
-            ->groupByAttribute('entity_id');
+        Mage::log('Start generating XML', Zend_Log::INFO, 'Stuntcoders_Googleshopping.log');
 
-        $doc = new DOMDocument('1.0');
+        try {
+            $productCollection = Mage::getModel('catalog/product')
+                                     ->getCollection()
+                                     ->joinField(
+                                         'category_id', 'catalog/category_product', 'category_id',
+                                         'product_id = entity_id', null, 'left'
+                                     )
+                                     ->addStoreFilter($this->getStores())
+                                     ->addAttributeToSelect('*')
+                                     ->addAttributeToFilter('category_id', array('in' => explode(',', $this->getCategories())))
+                                     ->groupByAttribute('entity_id');
+        } catch (Exception $e) {
+            Mage::log('Error creating product collection:', Zend_Log::ERR, 'Stuntcoders_Googleshopping_Error.log');
+            Mage::log($e->getTraceAsString(), Zend_Log::ERR, 'Stuntcoders_Googleshopping_Error.log');
+        }
+
+        $doc               = new DOMDocument('1.0');
         $doc->formatOutput = true;
 
         $rss = $doc->appendChild($doc->createElement('rss'));
@@ -44,17 +52,21 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
         $channel->appendChild($doc->createElement('description', $this->getDescription()));
 
         $attributes = json_decode($this->getAttributes(), true);
+
+        Mage::log('Attributes to use:', Zend_Log::DEBUG, 'Stuntcoders_Googleshopping_Debug.log');
+        Mage::log($this->getAttributes(), Zend_Log::DEBUG, 'Stuntcoders_Googleshopping_Debug .log');
+
         foreach ($productCollection as $product) {
 
             $price = $this->formatPriceForFeed($product->getPrice());
 
-            if($product->getPrice() != '0.0000') {
+            if ($product->getPrice() != '0.0000') {
 
                 $item = $channel->appendChild($doc->createElement('item'));
 
                 foreach ($attributes as $name => $value) {
-                    $tagValue = isset($value['default']) ? $value['default'] : '';
-                    $prefix = '';
+                    $tagValue    = isset($value['default']) ? $value['default'] : '';
+                    $prefix      = '';
                     $valuePrefix = '';
 
                     $itemTag = false;
@@ -62,19 +74,19 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                         if (is_array($subValue)) {
                             $subTagValue = isset($subValue['default']) ? $subValue['default'] : '';
 
-                            if (!empty($value['prefix'])) {
+                            if ( ! empty($value['prefix'])) {
                                 $prefix = $value['prefix'] . ':';
                             }
 
-                            if (!$itemTag) {
+                            if ( ! $itemTag) {
                                 $itemTag = $item->appendChild($doc->createElement($prefix . $name, ''));
 
-                                if (!empty($value['type'])) {
+                                if ( ! empty($value['type'])) {
                                     $itemTag->setAttribute('type', $value['type']);
                                 }
                             }
 
-                            if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
+                            if ( ! empty($value['attribute']) && $product->getData($value['attribute'])) {
                                 $subTagValue = $product->getData($subValue['attribute']);
                             }
 
@@ -82,18 +94,18 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                                 continue;
                             }
 
-                            if (!empty($subValue['prefix'])) {
+                            if ( ! empty($subValue['prefix'])) {
                                 $prefix = $subValue['prefix'] . ':';
                             }
 
-                            if (!empty($subValue['value_prefix'])) {
+                            if ( ! empty($subValue['value_prefix'])) {
                                 $valuePrefix = $subValue['value_prefix'];
                             }
 
                             $subItemTag = $itemTag->appendChild($doc->createElement($prefix . $subName));
                             $subItemTag->appendChild($doc->createCDATASection($valuePrefix . $subTagValue));
 
-                            if (!empty($value['type'])) {
+                            if ( ! empty($value['type'])) {
                                 $subItemTag->setAttribute('type', $subValue['type']);
                             }
                         }
@@ -106,11 +118,11 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                         $tagValue = $this->getGoogleCategory($product);
 
                     } else if ($name === 'sale_price') {
-                        if ($product->getPrice() > $product->getFinalPrice()){
+                        if ($product->getPrice() > $product->getFinalPrice()) {
                             $tagValue = $this->formatPriceForFeed($product->getFinalPrice());
                         }
 
-                    } else if (!empty($value['attribute']) && $product->getData($value['attribute'])) {
+                    } else if ( ! empty($value['attribute']) && $product->getData($value['attribute'])) {
                         $tagValue = $product->getData($value['attribute']);
                     }
 
@@ -118,18 +130,18 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                         continue;
                     }
 
-                    if (!empty($value['prefix'])) {
+                    if ( ! empty($value['prefix'])) {
                         $prefix = $value['prefix'] . ':';
                     }
 
-                    if (!empty($value['value_prefix'])) {
+                    if ( ! empty($value['value_prefix'])) {
                         $valuePrefix = $value['value_prefix'];
                     }
 
                     $itemTag = $item->appendChild($doc->createElement($prefix . $name));
                     $itemTag->appendChild($doc->createCDATASection($valuePrefix . $tagValue));
 
-                    if (!empty($value['type'])) {
+                    if ( ! empty($value['type'])) {
                         $itemTag->setAttribute('type', $value['type']);
                     }
                 }
@@ -152,81 +164,87 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
             }
         }
 
+        Mage::log('About creating feed with ' . $productCollection->count() . ' products.', Zend_Log::INFO, 'Stuntcoders_Googleshopping.log');
+
         return $doc->saveXML();
     }
 
-    public function categorySubcategory($_product) {
-        $level = 1;
-        $deepestId = false;
+    public function categorySubcategory($_product)
+    {
+        $level      = 1;
+        $deepestId  = false;
         $categories = array();
-        $response = array();
+        $response   = array();
 
         foreach ($_product->getCategoryCollection() as $category) {
             $category = Mage::getModel('catalog/category')->load($category->getId());
-            if($category->getIsActive()) {
+            if ($category->getIsActive()) {
                 $path = $category->getPathIds();
                 array_shift($path);
                 $categories[$category->getId()] = array(
                     'name' => $category->getName(),
                     'path' => $path
                 );
-                if((int)$category->getLevel() > $level) {
+                if ((int)$category->getLevel() > $level) {
                     $deepestId = $category->getId();
-                    $level = (int)$category->getLevel();
+                    $level     = (int)$category->getLevel();
                 }
             }
         }
 
-        if(!$deepestId) {
+        if ( ! $deepestId) {
             return false;
         }
 
-        foreach($categories[$deepestId]['path'] as $id) {
-            if(array_key_exists($id , $categories)){
+        foreach ($categories[$deepestId]['path'] as $id) {
+            if (array_key_exists($id, $categories)) {
                 $response[] = $categories[$id]['name'];
                 //array_push($response, $categories[$id]['name']);
             }
         }
-        $response = implode(" > ",$response);
+        $response = implode(" > ", $response);
+
         return $response;
 
     }
 
-    public function getGoogleCategory($_product){
-        $level = 1;
-        $deepestId = false;
+    public function getGoogleCategory($_product)
+    {
+        $level      = 1;
+        $deepestId  = false;
         $categories = array();
 
         foreach ($_product->getCategoryCollection() as $category) {
             $category = Mage::getModel('catalog/category')->load($category->getId());
-            if($category->getIsActive()) {
+            if ($category->getIsActive()) {
                 $categories[$category->getId()] = array(
                     'googleCategoryName' => $category->getGoogleCategory()
                 );
-                if((int)$category->getLevel() > $level) {
+                if ((int)$category->getLevel() > $level) {
                     $deepestId = $category->getId();
-                    $level = (int)$category->getLevel();
+                    $level     = (int)$category->getLevel();
                 }
             }
         }
 
-        if(!$deepestId) {
+        if ( ! $deepestId) {
             return false;
         }
         $googleCategory = $categories[$deepestId]['googleCategoryName'];
-        if(!empty($googleCategory)) {
+        if ( ! empty($googleCategory)) {
             return $googleCategory;
         }
 
         return false;
     }
 
-    public function formatPriceForFeed($price){
+    public function formatPriceForFeed($price)
+    {
 
         $price = sprintf("%F", $price);
         $price = substr($price, 0, -4) . ' ' . Mage::app()->getStore()->getCurrentCurrencyCode();
 
-        return  $price;
+        return $price;
     }
 
 }
