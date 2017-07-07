@@ -54,7 +54,7 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
         $attributes = json_decode($this->getAttributes(), true);
 
         Mage::log('Attributes to use:', Zend_Log::DEBUG, 'Stuntcoders_Googleshopping_Debug.log');
-        Mage::log($this->getAttributes(), Zend_Log::DEBUG, 'Stuntcoders_Googleshopping_Debug .log');
+        Mage::log($this->getAttributes(), Zend_Log::DEBUG, 'Stuntcoders_Googleshopping_Debug.log');
 
         foreach ($productCollection as $product) {
 
