@@ -34,6 +34,10 @@ class Stuntcoders_GoogleShopping_Model_Feed extends Mage_Core_Model_Abstract
                                      ->addStoreFilter($this->getStores())
                                      ->addAttributeToSelect('*')
                                      ->addAttributeToFilter('category_id', array('in' => explode(',', $this->getCategories())))
+                                     ->addAttributeToFilter(
+                                        'status',
+                                        array('eq' => Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+                                     )
                                      ->groupByAttribute('entity_id');
         } catch (Exception $e) {
             Mage::log('Error creating product collection:', Zend_Log::ERR, 'Stuntcoders_Googleshopping_Error.log');
