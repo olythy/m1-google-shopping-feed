@@ -1,8 +1,27 @@
 {
-  "name": "borasocom-team/stunt_mage_google_shopping_feed",
-  "type":"magento-module",
-  "require": {
-    "php": ">=5.3",
-    "magento-hackathon/magento-composer-installer": "*"
-  }
+    "name": "olythy/m1-google-shopping-feed",
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Karoly Nemethy",
+            "email": "olythy@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev":{
+        "phpunit/phpunit":"*",
+        "composer/composer":"*@dev"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.firegento.com"
+        }
+    ],
+    "extra":{
+        "magento-root-dir": "src/"
+    }
 }

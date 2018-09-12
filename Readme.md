@@ -93,8 +93,6 @@ Navigating to System -> Configuration and choosing in left menu Google Shopping 
 ![grid](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/grid.png "Grid preview")
 ![cron](https://s3-eu-west-1.amazonaws.com/stcd/stunt_mage_google_shopping_feed/system-config.png "System config")
 
-Copyright StuntCoders — [Start Your Online Store Now](http://stuntcoders.com/)
-
 ### JSON example configuration
 ```json
 {
@@ -140,3 +138,7 @@ Copyright StuntCoders — [Start Your Online Store Now](http://stuntcoders.com/)
 }
 
 ```
+
+## License
+
+The software licensed under the [MIT license](https://opensource.org/licenses/MIT).
