@@ -1,6 +1,6 @@
 {
     "name": "olythy/m1-google-shopping-feed",
-    "type": "module",
+    "type": "magento-module",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "magento-hackathon/magento-composer-installer": "^3.0"
     },
     "require-dev":{
         "phpunit/phpunit":"*",
