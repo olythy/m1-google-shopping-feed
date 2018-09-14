@@ -10,7 +10,7 @@ trait Stuntcoders_GoogleShopping_Model_HelperAccess
      * @param string $name
      * @return Mage_Core_Helper_Abstract
      */
-    protected function helper($name = null)
+    public function helper($name = null)
     {
         $name = $name ? "stuntcoders_googleshopping/{$name}" : 'stuntcoders_googleshopping';
         return Mage::helper($name);

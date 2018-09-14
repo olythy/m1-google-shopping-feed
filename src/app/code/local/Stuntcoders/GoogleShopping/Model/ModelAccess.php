@@ -10,7 +10,7 @@ trait Stuntcoders_GoogleShopping_Model_ModelAccess
      * @param string $name
      * @return false|Mage_Core_Model_Abstract
      */
-    protected function model($name = 'feed')
+    public function model($name = 'feed')
     {
         return Mage::getModel("stuntcoders_googleshopping/{$name}");
     }

@@ -9,7 +9,7 @@ trait Stuntcoders_GoogleShopping_Model_SessionAccess
     /**
      * @return Mage_Adminhtml_Model_Session
      */
-    protected function session($type = 'adminhtml')
+    public function session($type = 'adminhtml')
     {
         return  Mage::getSingleton("{$type}/session");
     }
