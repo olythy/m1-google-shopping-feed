@@ -1,12 +1,15 @@
 <?php
-// test github
+
 class Stuntcoders_GoogleShopping_Block_Add_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+
+    use Stuntcoders_GoogleShopping_Model_HelperAccess;
+
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form(array(
-            'id' => 'googleshopping_form',
-            'name' => 'googleshopping_form',
+            'id' => 'edit_form',
+            'name' => 'edit_form',
             'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
             'method' => 'post',
             'enctype' => 'multipart/form-data'
@@ -18,14 +21,14 @@ class Stuntcoders_GoogleShopping_Block_Add_Form extends Mage_Adminhtml_Block_Wid
         }
 
         $fieldset = $form->addFieldset('googleshopping_form', array(
-            'legend' => Mage::helper('stuntcoders_googleshopping')->__('Google Shopping Feed')
+            'legend' => $this->helper()->__('Google Shopping Feed')
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
             $fieldset->addField('stores', 'select', array(
                 'name' => 'stores[]',
-                'label' => Mage::helper('stuntcoders_googleshopping')->__('Store View'),
-                'title' => Mage::helper('stuntcoders_googleshopping')->__('Store View'),
+                'label' => $this->helper()->__('Store View'),
+                'title' => $this->helper()->__('Store View'),
                 'required' => true,
                 'values' => Mage::getSingleton('adminhtml/system_store')
                     ->getStoreValuesForForm(false, true),
@@ -39,32 +42,32 @@ class Stuntcoders_GoogleShopping_Block_Add_Form extends Mage_Adminhtml_Block_Wid
         }
 
         $fieldset->addField('path', 'text', array(
-            'label' => Mage::helper('stuntcoders_googleshopping')->__('Path for Feed .xml'),
+            'label' => $this->helper()->__('Path for Feed .xml'),
             'name' => 'path',
             'required'  => true,
         ));
 
         $fieldset->addField('title', 'text', array(
-            'label' => Mage::helper('stuntcoders_googleshopping')->__('Feed Title'),
+            'label' => $this->helper()->__('Feed Title'),
             'name' => 'title',
             'required'  => true,
         ));
 
         $fieldset->addField('description', 'textarea', array(
-            'label' => Mage::helper('stuntcoders_googleshopping')->__('Feed Description'),
+            'label' => $this->helper()->__('Feed Description'),
             'name' => 'description',
             'required'  => true,
         ));
 
         $fieldset->addField('categories', 'multiselect', array(
-            'label' => Mage::helper('stuntcoders_googleshopping')->__('Feed Categories'),
+            'label' => $this->helper()->__('Feed Categories'),
             'name' => 'categories',
-            'values' => Mage::helper('stuntcoders_googleshopping')->getCategoriesOptions(),
+            'values' => $this->helper()->getCategoriesOptions(),
             'required'  => true,
         ));
 
         $fieldset->addField('attributes', 'textarea', array(
-            'label' => Mage::helper('stuntcoders_googleshopping')->__('Feed Attributes'),
+            'label' => $this->helper()->__('Feed Attributes'),
             'name' => 'attributes',
             'style' => 'width:500px; height:500px',
         ));

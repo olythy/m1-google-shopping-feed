@@ -53,7 +53,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <Stuntcoders_GoogleShopping after="Mage_Adminhtml">Stuntcoders_GoogleShopping_Adminhtml</Stuntcoders_GoogleShopping>
+                        <stuntcoders_googleshopping before="Mage_Adminhtml">Stuntcoders_GoogleShopping_Adminhtml</stuntcoders_googleshopping>
                     </modules>
                 </args>
             </adminhtml>

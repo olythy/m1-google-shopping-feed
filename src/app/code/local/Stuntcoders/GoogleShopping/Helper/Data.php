@@ -2,21 +2,22 @@
 
 class Stuntcoders_GoogleShopping_Helper_Data extends Mage_Core_Helper_Abstract
 {
+
+    use Stuntcoders_GoogleShopping_Model_ModelAccess;
+
     public function getCategoriesOptions()
     {
-        $categories = Mage::getModel('catalog/category')->getCollection()
-            ->addAttributeToSelect('name')
-            ->addAttributeToFilter('name', array('neq' => ''));
+        return $this->model('system_config_source_category')->toOptionArray();
+    }
 
-        $values = array();
-
-        foreach ($categories as $category) {
-            $values[] = array(
-                'value' => $category->getId(),
-                'label' => $category->getName(),
-            );
+    public function toFile(Stuntcoders_GoogleShopping_Model_Feed $feed)
+    {
+        $fileName = implode('/', [MAGENTO_ROOT, $feed->getPath()]);
+        $file = new Varien_Io_File();
+        $file->mkdir(dirname($fileName), 0755, true);
+        if ($file->fileExists($fileName) && $file->isWriteable($fileName)) {
+            $file->filePutContent('', $fileName);
         }
-
-        return $values;
+        $file->write($fileName, $feed->generateXml());
     }
 }

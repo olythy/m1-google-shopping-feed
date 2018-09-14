@@ -10,8 +10,7 @@
     </adminhtml_googleshopping_index>
     <adminhtml_googleshopping_add>
         <reference name="content">
-            <block type="stuntcoders_googleshopping/addForm" name="stuntcoders.import.form"
-                   template="stuntcoders/googleshopping/add.phtml">
+            <block type="stuntcoders_googleshopping/addForm" name="stuntcoders.import.form">
                 <block type="stuntcoders_googleshopping/add_form" name="stuntcoders.googleshopping.add" />
             </block>
         </reference>

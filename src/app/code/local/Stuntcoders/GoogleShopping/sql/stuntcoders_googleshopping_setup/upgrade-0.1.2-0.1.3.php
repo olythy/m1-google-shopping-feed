@@ -9,7 +9,7 @@ $attributeSetId = $installer->getDefaultAttributeSetId($entityTypeId);
 
 $installer->addAttribute('catalog_category', 'google_category', array(
     'type' => 'varchar',
-    'label' => 'Google Merchant Category',
+    'label' => 'Google merchant category',
     'input' => 'text',
     'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE,
     'visible' => true,
@@ -26,9 +26,10 @@ $installer->addAttribute('catalog_category', 'google_category', array(
 $installer->addAttributeToGroup(
     $entityTypeId,
     $attributeSetId,
-    'General Information',
+    'General',
     'google_category',
     4
 );
+
 
 $installer->endSetup();

@@ -10,7 +10,9 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "magento-hackathon/magento-composer-installer": "^3.0"
+        "magento-hackathon/magento-composer-installer": "^3.0",
+        "tightenco/collect": "^5.5",
+        "lukesnowden/google-shopping-feed": "^2.2"
     },
     "require-dev":{
         "phpunit/phpunit":"*",
